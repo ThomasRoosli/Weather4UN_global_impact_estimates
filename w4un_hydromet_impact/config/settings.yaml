@@ -1,0 +1,6 @@
+climada:
+  tropical_cyclone:
+    max_memory_gb: 1
+    model: H1980
+  rounding:
+    significant_digits: 2
