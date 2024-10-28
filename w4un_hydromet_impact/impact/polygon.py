@@ -16,6 +16,9 @@ from climada_petals.engine.warn import Warn, Operation
 from w4un_hydromet_impact import CONFIG
 from w4un_hydromet_impact.impact.grid import ProbabilityPoints, Grid
 
+# do not create a figure with matplotlib
+plt.ioff()
+
 logger = logging.getLogger(__name__)
 
 POLYGON_LINE_WIDTH = 1.0

@@ -30,7 +30,8 @@ _ROUND_DOWN = ROUND_FLOOR
 def save_impact_forecast(impact_forecast: Forecast,
                          impact_type: str,
                          hazard_metadata: HazardMetadata,
-                         hazard_source: HazardSource) -> tuple[str, str, str, str]:
+                         hazard_source: HazardSource,
+                         base_path: str = '') -> tuple[str, str, str, str]:
     """
     Stores the results of the impact calculation (impact data, matrix, summary and polygon)
     in S3's ch.meteoswiss.hydrometimpact.impact.

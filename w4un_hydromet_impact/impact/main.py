@@ -28,7 +28,8 @@ logger = logging.getLogger(__name__)
 def calculate_impact(file_location_hazard: str,
                      file_location_metadata: str,
                      hazard_source: HazardSource,
-                     calculate_impact_properties: CalculateImpactProperties) -> list[Tuple]:
+                     calculate_impact_properties: CalculateImpactProperties,
+                     base_path: str = '') -> list[Tuple]:
     """
     Calculates the impact of the specified hazard regarding the specified impact definition.
     :param hazard: A hazard forecast extracted from a weather forecast.
@@ -63,7 +64,8 @@ def calculate_impact(file_location_hazard: str,
         data, matrix, summary, polygon = save_impact_forecast(impact_forecast,
                                                               impact_type,
                                                               hazard_metadata_content,
-                                                              hazard_source)
+                                                              hazard_source,
+                                                              base_path)
 
 
         # send impact calculated event
