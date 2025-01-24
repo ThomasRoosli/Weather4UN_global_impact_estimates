@@ -26,10 +26,10 @@ def download_exposures(country: Country) -> Exposures:
     """
     path = climada_client.download_dataset(
                 dataset=climada_client.get_dataset_info(data_type='litpop',
-                                                        properties={'country_name': country.name,
+                                                        properties={'country_iso3alpha': country.alpha3,
                                                                     'exponents':'(0,1)',
                                                                     'fin_mode':'pop',
-                                                                    'version':'v2'
+                                                                    #'version':'v2'
                                                                     }
                                                         )
             )[1][0]

@@ -40,21 +40,21 @@ def save_impact_forecast(impact_forecast: Forecast,
     impact_data = _extract_impact(impact_forecast)
 
     # save impact forecast data
-    file_name_impact_data = build_file_name_from_impact_forecast(impact_forecast, impact_type, 'data.csv')
+    file_name_impact_data = base_path + '/' + build_file_name_from_impact_forecast(impact_forecast, impact_type, 'data.csv')
     impact_data.write_csv(file_name_impact_data)
 
     # save impact forecast matrix
-    file_name_impact_matrix = build_file_name_from_impact_forecast(impact_forecast, impact_type, 'matrix.npz')
+    file_name_impact_matrix = base_path + '/' + build_file_name_from_impact_forecast(impact_forecast, impact_type, 'matrix.npz')
     impact_data.write_sparse_csr(file_name_impact_matrix)
 
     # save aggregate of impact forecast
-    file_name_summary = build_file_name_from_impact_forecast(impact_forecast, impact_type, 'summary.json')
+    file_name_summary = base_path + '/' + build_file_name_from_impact_forecast(impact_forecast, impact_type, 'summary.json')
     summary = summarize_impact(impact_forecast, impact_type, hazard_metadata, hazard_source)
     with open(file_name_summary, 'w') as file:
         json.dump(summary, file, indent=4)  # indent=4 for pretty printing
 
     # save polygon of impact forecast
-    file_name_polygon = build_file_name_from_impact_forecast(impact_forecast, impact_type, 'polygon.geojson')
+    file_name_polygon = base_path + '/' + build_file_name_from_impact_forecast(impact_forecast, impact_type, 'polygon.geojson')
     polygons = create_polygons_from_impact(impact_forecast)
     polygons.to_file(file_name_polygon, driver='GeoJSON')
 

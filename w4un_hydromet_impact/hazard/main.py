@@ -29,6 +29,7 @@ logger = logging.getLogger(__name__)
 def calculate_hazard(weather_data_location: str,
                      centroid_location: str,
                      hazard_source: HazardSource = KnownHazardSources.TROPICAL_CYCLONE_FROM_ECMWF,
+                     base_path: str = '',
                      ) -> list[Tuple]:
     """
     Calculates the hazard of the specified weather forecast.
@@ -37,12 +38,14 @@ def calculate_hazard(weather_data_location: str,
     :param hazard_source: the hazard source to be added to new events
     :param job_data: the job data to be added to new events
     :param export_destinations: allowed destinations for hazard products
+    :param base_path: string where hazard should be saved
     :return: a list of the events that have been sent
     """
     if hazard_source == KnownHazardSources.TROPICAL_CYCLONE_FROM_ECMWF:
             return _load_data_and_calculate_tc_hazard_by_ecmwf(weather_data_location,
                                                                centroid_location,
                                                                hazard_source,
+                                                               base_path,
                                                                )
 
     else:
@@ -60,6 +63,7 @@ def _log_hazard_calculation_start(centroid_location: str,
 def _load_data_and_calculate_tc_hazard_by_ecmwf(weather_data_location: str,
                                                 centroid_location: str,
                                                 hazard_source: HazardSource,
+                                                base_path: str = '',
                                                 ) -> list[Tuple]:
     """
     Calculates the hazard of the specified weather forecast
@@ -67,6 +71,7 @@ def _load_data_and_calculate_tc_hazard_by_ecmwf(weather_data_location: str,
     :param weather_data_location: the location of the file containing the weather data in S3
     :param centroid_location: the location of the file containing the centroid to be used in S3
     :param hazard_source: the hazard source to be added to new events
+    :param base_path: string where hazard should be saved
     :param job_data: the job data to be added to new events
     :return: a list of the events that have been sent
     """
@@ -78,17 +83,20 @@ def _load_data_and_calculate_tc_hazard_by_ecmwf(weather_data_location: str,
 
     return _calculate_hazard_from_forecasts(tc_forecasts,
                                             centroid_location,
-                                            hazard_source)
+                                            hazard_source,
+                                            base_path)
 
 
 def _calculate_hazard_from_forecasts(tc_forecasts: list[TCForecast],
                                      centroid_location: str,
-                                     hazard_source: HazardSource) -> list[Tuple]:
+                                     hazard_source: HazardSource,
+                                     base_path: str = '') -> list[Tuple]:
     """
     Calculates the hazard of the specified tropical cyclone forecasts.
     :param tc_forecasts: the forecasts
     :param centroid_location: the location of the file containing the centroid to be used in S3
     :param hazard_source: the hazard source to be added to new events
+    :param base_path: string where hazard should be saved
     :param job_data: the job data to be added to new events
     :return: a list of the events that have been sent
     """
@@ -109,7 +117,9 @@ def _calculate_hazard_from_forecasts(tc_forecasts: list[TCForecast],
 
         file_location_hazard, file_location_metadata = save_hazard_data(tropical_cyclone,
                                                                         hazard_metadata,
-                                                                        hazard_source)
+                                                                        hazard_source,
+                                                                        base_path,
+                                                                        )
 
 
 

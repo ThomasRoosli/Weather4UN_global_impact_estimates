@@ -35,6 +35,7 @@ def calculate_impact(file_location_hazard: str,
     :param hazard: A hazard forecast extracted from a weather forecast.
     :param calculate_impact_properties: the arguments of the impact calculation
     :param job_data: the job data to be added to new events
+    :param base_path: string where impact should be saved
     :return: list of issued events to notify about the impact calculation
     """
     # ignore sonarqube rule: Too many local variables
