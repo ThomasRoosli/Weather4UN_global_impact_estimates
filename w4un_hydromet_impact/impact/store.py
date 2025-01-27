@@ -62,63 +62,6 @@ def save_impact_forecast(impact_forecast: Forecast,
     return file_name_impact_data, file_name_impact_matrix, file_name_summary, file_name_polygon
 
 
-# def _upload_impact_data(impact_data: Impact, impact_forecast: Forecast,
-#                         impact_type: str) -> S3Location:
-#     """
-#     Stores a CSV containing the impact data.
-#     """
-#     file_name = build_file_name_from_impact_forecast(impact_forecast, impact_type, 'data.csv')
-#     s3_location_impact_data = s3_location_for_impact_file(file_name)
-#     upload_impact_data(impact_data, s3_location_impact_data)
-#
-#     logger.info('Impact data was calculated')
-#     return s3_location_impact_data
-#
-#
-# def _upload_impact_matrix(impact_data: Impact, impact_forecast: Forecast,
-#                           impact_type: str) -> S3Location:
-#     """
-#     Stores a NPZ containing the impact matrix.
-#     """
-#     file_name = build_file_name_from_impact_forecast(impact_forecast, impact_type, 'matrix.npz')
-#     impact_forecast.write_sparse_csr(tmp_file.name)
-#     s3_location_impact_matrix = s3_location_for_impact_file(file_name)
-#     upload_impact_matrix(impact_data, s3_location_impact_matrix)
-#
-#     logger.info('Impact matrix was calculated')
-#     return s3_location_impact_matrix
-#
-#
-# def _upload_impact_summary(impact_forecast: Forecast,
-#                            impact_type: str,
-#                            hazard_metadata: HazardMetadata,
-#                            hazard_source: HazardSource) -> S3Location:
-#     """
-#     Stores a JSON containing a summary of the impact forecast.
-#     """
-#     file_name = build_file_name_from_impact_forecast(impact_forecast, impact_type, 'summary.json')
-#     summary = summarize_impact(impact_forecast, impact_type, hazard_metadata, hazard_source)
-#     s3_location_impact_summary = s3_location_for_impact_file(file_name)
-#     upload_json(summary, s3_location_impact_summary)
-#
-#     logger.info('Impact was calculated, the summary is: \n%s', summary)
-#     return s3_location_impact_summary
-#
-#
-# def _upload_impact_polygon(impact_forecast: Forecast,
-#                            impact_type: str) -> S3Location:
-#     """
-#     Stores a Geo JSON containing a polygon with of the affected area of the impact forecast.
-#     """
-#     file_name_polygon = build_file_name_from_impact_forecast(impact_forecast, impact_type, 'polygon.geojson')
-#     polygons = create_polygons_from_impact(impact_forecast)
-#     s3_location_impact_polygon = s3_location_for_impact_file(file_name_polygon)
-#     upload_geo_object(polygons, s3_location_impact_polygon)
-#
-#     logger.info('Affected area was calculated, the geojson is: \n%s', polygons.to_json())
-#     return s3_location_impact_polygon
-
-
 def summarize_impact(impact_forecast: Forecast,
                      impact_type: str,
                      hazard_metadata: HazardMetadata,

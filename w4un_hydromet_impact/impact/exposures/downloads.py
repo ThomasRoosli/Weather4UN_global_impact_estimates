@@ -29,33 +29,12 @@ def download_exposures(country: Country) -> Exposures:
                                                         properties={'country_iso3alpha': country.alpha3,
                                                                     'exponents':'(0,1)',
                                                                     'fin_mode':'pop',
-                                                                    #'version':'v2'
                                                                     }
                                                         )
             )[1][0]
     exposures = Exposures.from_hdf5(path)
 
     return exposures
-
-
-# def download_exposures(s3_location: S3Location, expected_country: Optional[Country] = None) -> Exposures:
-#     """
-#     Downloads the requested exposure file from S3 and transforms it into an exposures object.
-#     Afterward, the built-in checks of CLIMADA for exposures are run.
-#     :param s3_location: The location of the file in the S3 bucket.
-#     :param expected_country: A country that is expected to be referenced from the exposures (only checked if specified)
-#     :return: valid exposures object with reduced extent
-#     """
-#     with download_as_tempfile(s3_location) as tmp_downloaded_exposures:
-#         try:
-#             exposures = Exposures.from_hdf5(tmp_downloaded_exposures.name)
-#         except Exception as error:
-#             raise ClimadaError(
-#                 f'Cannot deserialize exposures from {s3_location}.') from error
-#     check_exposures_consistency(exposures, s3_location)
-#     if expected_country:
-#         assert_exposures_match_country(exposures, expected_country)
-#     return exposures
 
 
 def exposures_file_name_by_country(country_id: "str | int", impact_type: str) -> str:
