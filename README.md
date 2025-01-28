@@ -4,5 +4,5 @@ The WMO Coordination Mechanism (WCM) aims to provide relevant weather and climat
 Follow this steps to be able to run the Jupyter Notebook:
 - Create a conda/mamba environment with climada_python v4.1.1 and climada_petals v4.1.0 installed. Do this by running "mamba install -c conda-forge climada-petals=4.1.0" (it is always recommended to use a new environment.
 - Install the pydantic package and the jupyter package additionally "mamba install pydantic" and "mamba install jupyter"
-- Clone this repository to the folder where Climada is installed: "pip install -e /path/to/Weather4UN_global_impact_estimates"
-- Open the jupyter notebook: jupyter/Weather4UN_TC_impacts.ipynb and explore the functionality
+- Clone this repository to a local folder and install it with pip: "pip install -e /path/to/Weather4UN_global_impact_estimates"
+- Open this jupyter notebook from this repository: "jupyter/Weather4UN_TC_impacts.ipynb" and explore the functionality
